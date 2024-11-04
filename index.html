@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Frete</title>
+    <style>
+        /* Estilo para o corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Estilo do contêiner */
+        .container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Estilo dos títulos */
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Estilo das caixas de entrada */
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Mudança de cor na borda ao focar */
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #4caf50;
+        }
+
+        /* Estilo dos botões */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Efeito de hover nos botões */
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilo do texto do resultado */
+        #resultado {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Frete</h2>
+        
+        <!-- Formulário para entrada de dados -->
+        <label for="enderecoCliente">Endereço do Cliente:</label>
+        <input type="text" id="enderecoCliente" placeholder="Digite o endereço do cliente">
+
+        <label for="km">Distância em km:</label>
+        <input type="number" id="km" placeholder="Digite a distância em km" step="0.1">
+
+        <!-- Botões para calcular e enviar via WhatsApp -->
+        <button onclick="calcularFrete()">Calcular Frete</button>
+        <button onclick="enviarWhatsApp()">Enviar via WhatsApp</button>
+
+        <!-- Área para mostrar o resultado -->
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function calcularFrete() {
+            const km = parseFloat(document.getElementById('km').value);
+            const enderecoCliente = document.getElementById('enderecoCliente').value;
+            const enderecoLoja = "R. Renuncio Baldissera, 469, Sinop - MT, 78553-282";
+
+            const valorBase = 5.00; // Valor fixo para o primeiro km
+            const precoPorKm = 1.10; // Preço por km adicional a partir do segundo km
+
+            if (isNaN(km) || km <= 0 || enderecoCliente.trim() === "") {
+                document.getElementById('resultado').innerText = "Por favor, insira uma distância e o endereço do cliente.";
+                return;
+            }
+
+            let valorFrete = valorBase;
+            if (km > 1) {
+                valorFrete += (km - 1) * precoPorKm;
+            }
+
+            const mensagemFrete = `
+Endereço da Loja: ${enderecoLoja}
+Endereço do Cliente: ${enderecoCliente}
+Distância: ${km.toFixed(1)} km
+Valor do Frete: R$ ${valorFrete.toFixed(2)}
+            `;
+
+            document.getElementById('resultado').innerText = mensagemFrete.trim();
+        }
+
+        function enviarWhatsApp() {
+            const enderecoCliente = document.getElementById('enderecoCliente').value;
+            const km = parseFloat(document.getElementById('km').value);
+            const enderecoLoja = "R. Renuncio Baldissera, 469, Sinop - MT, 78553-282";
+
+            const valorBase = 5.00;
+            const precoPorKm = 1.10;
+
+            if (isNaN(km) || km <= 0 || enderecoCliente.trim() === "") {
+                alert("Por favor, insira uma distância e o endereço do cliente antes de enviar.");
+                return;
+            }
+
+            let valorFrete = valorBase;
+            if (km > 1) {
+                valorFrete += (km - 1) * precoPorKm;
+            }
+
+            const mensagemWhatsApp = `Olá! Aqui estão os detalhes do pedido:
+Endereço da Loja: ${enderecoLoja}
+Endereço do Cliente: ${enderecoCliente}
+Distância: ${km.toFixed(1)} km
+Valor do Frete: R$ ${valorFrete.toFixed(2)}`;
+
+            const numeroWhatsApp = ""; // Substitua pelo número de WhatsApp desejado
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemWhatsApp)}`;
+            window.open(urlWhatsApp, '_blank');
+        }
+    </script>
+</body>
+</html>
