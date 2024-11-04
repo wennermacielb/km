@@ -102,13 +102,17 @@
             <img src="logo.png" alt="Logo da Empresa">
             <h2>Calculadora de Entrega</h2>
         </div>
-        
+        <link rel="icon" href="logo.png" type="image/png">
+
         <!-- Formulário para entrada de dados -->
         <label for="enderecoCliente">Endereço do Cliente:</label>
         <input type="text" id="enderecoCliente" placeholder="Digite o endereço do cliente">
 
         <label for="km">Distância em km:</label>
         <input type="number" id="km" placeholder="Digite a distância em km" step="0.1">
+
+        <label for="pedidoNumero">Seu pedido está em:</label>
+        <input type="text" id="pedidoNumero" placeholder="Digite o número do pedido">
 
         <!-- Botões para calcular e enviar via WhatsApp -->
         <button onclick="calcularFrete()">Calcular Frete</button>
@@ -123,6 +127,7 @@
             const km = parseFloat(document.getElementById('km').value);
             const enderecoCliente = document.getElementById('enderecoCliente').value;
             const enderecoLoja = "R. Renuncio Baldissera, 469, Sinop - MT, 78553-282";
+            const numeroPedido = document.getElementById('pedidoNumero').value; // Captura o número do pedido
 
             const valorBase = 5.00; // Valor fixo para o primeiro km
             const precoPorKm = 1.10; // Preço por km adicional a partir do segundo km
@@ -141,6 +146,7 @@
 Endereço da Loja: ${enderecoLoja}
 Endereço do Cliente: ${enderecoCliente}
 Distância: ${km.toFixed(1)} km
+Número do Pedido: ${numeroPedido} 
 Valor do Frete: R$ ${valorFrete.toFixed(2)}
             `;
 
@@ -151,6 +157,7 @@ Valor do Frete: R$ ${valorFrete.toFixed(2)}
             const enderecoCliente = document.getElementById('enderecoCliente').value;
             const km = parseFloat(document.getElementById('km').value);
             const enderecoLoja = "R. Renuncio Baldissera, 469, Sinop - MT, 78553-282";
+            const numeroPedido = document.getElementById('pedidoNumero').value; // Captura o número do pedido
 
             const valorBase = 5.00;
             const precoPorKm = 1.10;
@@ -169,6 +176,7 @@ Valor do Frete: R$ ${valorFrete.toFixed(2)}
 Endereço da Loja: ${enderecoLoja}
 Endereço do Cliente: ${enderecoCliente}
 Distância: ${km.toFixed(1)} km
+Número do Pedido: ${numeroPedido} // Inclui o número do pedido
 Valor do Frete: R$ ${valorFrete.toFixed(2)}`;
 
             const numeroWhatsApp = ""; // Substitua pelo número de WhatsApp desejado
