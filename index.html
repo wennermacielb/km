@@ -26,12 +26,26 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
+            text-align: center;
         }
 
-        /* Estilo dos títulos */
+        /* Estilo do título e logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-container img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px; /* Espaço entre a logo e o texto */
+        }
+
         h2 {
-            text-align: center;
             color: #333;
+            font-size: 24px;
         }
 
         /* Estilo das caixas de entrada */
@@ -83,7 +97,11 @@
 </head>
 <body>
     <div class="container">
-        <h2>Calculadora de Frete</h2>
+        <!-- Contêiner da logo e título -->
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo da Empresa">
+            <h2>Calculadora de Entrega</h2>
+        </div>
         
         <!-- Formulário para entrada de dados -->
         <label for="enderecoCliente">Endereço do Cliente:</label>
